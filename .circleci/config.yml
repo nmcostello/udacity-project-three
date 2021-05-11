@@ -77,7 +77,7 @@ jobs:
       - run: 
           name: Scan-backend placeholder
           command: |
-          exit 1
+            exit 1
                 
   test-backend:
     docker:
@@ -87,7 +87,7 @@ jobs:
       - run: 
           name: Scan-backend placeholder
           command: |
-          exit 1
+            exit 1
             
   scan-frontend:
     docker:
@@ -97,7 +97,7 @@ jobs:
       - run: 
           name: Scan-backend placeholder
           command: |
-          exit 1
+            exit 1
 
   scan-backend:
     docker:
@@ -107,7 +107,7 @@ jobs:
       - run: 
           name: Scan-backend placeholder
           command: |
-          exit 1
+            exit 1
 
   deploy-infrastructure:
     docker:
