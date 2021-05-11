@@ -74,6 +74,10 @@ jobs:
       # Docker image here
       - image: alpine
     steps:
+      - run: 
+          name: Scan-backend placeholder
+          command: |
+          exit 1
       # Checkout code from git
       # Restore from cache
       # Your job code here
@@ -83,6 +87,10 @@ jobs:
       # Docker image here
       - image: alpine
     steps:
+      - run: 
+          name: Scan-backend placeholder
+          command: |
+          exit 1
       # Checkout code from git
       # Restore from cache
       # Your job code here
@@ -92,6 +100,10 @@ jobs:
       # Docker image here
       - image: alpine
     steps:
+      - run: 
+          name: Scan-backend placeholder
+          command: |
+          exit 1
       # Checkout code from git
       # Restore from cache
       # Your job code here
@@ -101,6 +113,10 @@ jobs:
       # Docker image here
       - image: alpine
     steps:
+      - run: 
+          name: Scan-backend placeholder
+          command: |
+          exit 1
       # Checkout code from git
       # Restore from cache
       # Your job code here
