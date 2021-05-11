@@ -78,9 +78,6 @@ jobs:
           name: Scan-backend placeholder
           command: |
           exit 1
-      # Checkout code from git
-      # Restore from cache
-      # Your job code here
                 
   test-backend:
     docker:
@@ -91,9 +88,6 @@ jobs:
           name: Scan-backend placeholder
           command: |
           exit 1
-      # Checkout code from git
-      # Restore from cache
-      # Your job code here
             
   scan-frontend:
     docker:
@@ -104,9 +98,6 @@ jobs:
           name: Scan-backend placeholder
           command: |
           exit 1
-      # Checkout code from git
-      # Restore from cache
-      # Your job code here
 
   scan-backend:
     docker:
@@ -117,9 +108,6 @@ jobs:
           name: Scan-backend placeholder
           command: |
           exit 1
-      # Checkout code from git
-      # Restore from cache
-      # Your job code here
 
   deploy-infrastructure:
     docker:
