@@ -138,6 +138,7 @@ jobs:
   configure-infrastructure:
     docker:
       # Docker image here that supports Ansible
+      - image: ansible/ansible
     steps:
       # Checkout code from git
       # Add ssh keys with fingerprint
