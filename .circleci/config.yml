@@ -72,6 +72,7 @@ jobs:
   test-frontend:
     docker:
       # Docker image here
+      - image: alpine
     steps:
       # Checkout code from git
       # Restore from cache
@@ -80,6 +81,7 @@ jobs:
   test-backend:
     docker:
       # Docker image here
+      - image: alpine
     steps:
       # Checkout code from git
       # Restore from cache
@@ -88,6 +90,7 @@ jobs:
   scan-frontend:
     docker:
       # Docker image here
+      - image: alpine
     steps:
       # Checkout code from git
       # Restore from cache
@@ -96,6 +99,7 @@ jobs:
   scan-backend:
     docker:
       # Docker image here
+      - image: alpine
     steps:
       # Checkout code from git
       # Restore from cache
@@ -104,6 +108,7 @@ jobs:
   deploy-infrastructure:
     docker:
       # Docker image here that supports AWS CLI
+      - image: amazon/aws-cli
     steps:
       # Checkout code from git
       - run:
@@ -158,6 +163,7 @@ jobs:
   run-migrations:
     docker:
       # Docker image here that supports NodeJS
+      - image: node
     steps:
       # Checkout code from git
       - run:
@@ -175,6 +181,7 @@ jobs:
   deploy-frontend:
     docker:
       # Docker image here that supports AWS CLI
+      - image: amazon/aws-cli
     steps:
       # Checkout code from git
       - run:
@@ -195,7 +202,7 @@ jobs:
                     
   deploy-backend:
     docker:
-      # Docker image here that supports Ansible
+      - image: ansible/ansible
     steps:
       # Checkout code from git
       # Add ssh keys with fingerprint
@@ -212,7 +219,8 @@ jobs:
 
   smoke-test:
     docker:
-      # Lightweight Docker image 
+      # Lightweight Docker image
+      - image: apline
     steps:
       # Checkout code from git
       - run:
@@ -252,6 +260,7 @@ jobs:
 cleanup:
     docker:
       # Docker image here
+      - image: alpine
     steps:
       # Checkout code from git
       - run:
