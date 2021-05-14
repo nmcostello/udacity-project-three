@@ -84,7 +84,8 @@ jobs:
       # Docker image here
       - image: circleci/node:13.8.0
     steps:
-      - run: Backend Test
+      - run: 
+          name: Backend Test
           command: |
             cd ~/project/backend
             npm i
