@@ -72,22 +72,23 @@ jobs:
   test-frontend:
     docker:
       # Docker image here
-      - image: alpine
+      - image: circleci/node:13.8.0
     steps:
       - run: 
-          name: Scan-backend placeholder
+          name: Frontend Test
           command: |
             exit 1
                 
   test-backend:
     docker:
       # Docker image here
-      - image: alpine
+      - image: circleci/node:13.8.0
     steps:
-      - run: 
-          name: Scan-backend placeholder
+      - run: Backend Test
           command: |
-            exit 1
+            cd ~/project/backend
+            npm i
+            npm run test
             
   scan-frontend:
     docker:
