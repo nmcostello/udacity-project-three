@@ -74,10 +74,13 @@ jobs:
       # Docker image here
       - image: circleci/node:13.8.0
     steps:
+    - checkout
       - run: 
           name: Frontend Test
           command: |
-            exit 1
+            cd ~/project/frontend
+            npm i
+            npm run test
                 
   test-backend:
     docker:
@@ -95,22 +98,26 @@ jobs:
   scan-frontend:
     docker:
       # Docker image here
-      - image: alpine
+      - image: circleci/node:13.8.0
     steps:
       - run: 
-          name: Scan-backend placeholder
+          name: scanning frontend
           command: |
-            exit 1
+            cd ~/project/frontend
+            npm i
+            npm audit --audit-level=critical
 
   scan-backend:
     docker:
       # Docker image here
-      - image: alpine
+      - image: circleci/node:13.8.0
     steps:
       - run: 
-          name: Scan-backend placeholder
+          name: scanning backend
           command: |
-            exit 1
+            cd ~/project/frontend
+            npm i
+            npm audit --audit-level=critical
 
   deploy-infrastructure:
     docker:
