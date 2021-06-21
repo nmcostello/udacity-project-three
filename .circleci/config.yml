@@ -74,7 +74,7 @@ jobs:
       # Docker image here
       - image: circleci/node:13.8.0
     steps:
-    - checkout
+      - checkout
       - run: 
           name: Frontend Test
           command: |
