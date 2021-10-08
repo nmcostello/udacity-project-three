@@ -251,7 +251,7 @@ jobs:
             # Your code here
             exit 1
      # Here's where you will add some code to rollback on failure
-     - slack/notify:
+      - slack/notify:
           event: fail
           template: basic_fail_1
       # When there is a successful deployment, send a notification with a different template.
