@@ -397,10 +397,10 @@ jobs:
 workflows:
   default:
     jobs:
-      - build-frontend
+      - build-frontend:
           context:
             - slack
-      - build-backend
+      - build-backend:
           context:
             - slack
       - test-frontend:
