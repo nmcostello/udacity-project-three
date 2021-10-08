@@ -1,4 +1,6 @@
 version: 2.1
+orbs:
+  slack: circleci/slack@4.4.4
 
 commands:
   destroy-environment:
@@ -50,6 +52,13 @@ jobs:
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-build
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
+      # When there is a successful deployment, send a notification with a different template.
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1
 
   build-backend:
     docker:
@@ -68,6 +77,13 @@ jobs:
       - save_cache:
           paths: [backend/node_modules]
           key: backend-build
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
+      # When there is a successful deployment, send a notification with a different template.
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1
 
   test-frontend:
     docker:
@@ -81,6 +97,13 @@ jobs:
             cd ~/project/frontend
             npm i
             npm run test
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
+      # When there is a successful deployment, send a notification with a different template.
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1
                 
   test-backend:
     docker:
@@ -94,6 +117,13 @@ jobs:
             cd ~/project/backend
             npm i
             npm run test
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
+      # When there is a successful deployment, send a notification with a different template.
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1
             
   scan-frontend:
     docker:
@@ -107,6 +137,13 @@ jobs:
             cd ~/project/frontend
             npm i
             npm audit fix --audit-level=critical --force
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
+      # When there is a successful deployment, send a notification with a different template.
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1
 
   scan-backend:
     docker:
@@ -120,6 +157,13 @@ jobs:
             cd ~/project/frontend
             npm i
             npm audit fix --audit-level=critical --force
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
+      # When there is a successful deployment, send a notification with a different template.
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1
 
   deploy-infrastructure:
     docker:
@@ -154,7 +198,14 @@ jobs:
           root: ~/
           paths:
             - project/.circleci/ansible/inventory.txt
-      # Here's where you will add some code to rollback on failure      
+      # Here's where you will add some code to rollback on failure
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
+      # When there is a successful deployment, send a notification with a different template.
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1 
 
   configure-infrastructure:
     docker:
@@ -174,7 +225,14 @@ jobs:
           command: |
             # Your code here
             exit 1
-      # Here's where you will add some code to rollback on failure      
+      # Here's where you will add some code to rollback on failure
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
+      # When there is a successful deployment, send a notification with a different template.
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1     
 
   run-migrations:
     docker:
@@ -192,7 +250,14 @@ jobs:
           command: |
             # Your code here
             exit 1
-     # Here's where you will add some code to rollback on failure      
+     # Here's where you will add some code to rollback on failure
+     - slack/notify:
+          event: fail
+          template: basic_fail_1
+      # When there is a successful deployment, send a notification with a different template.
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1     
 
   deploy-frontend:
     docker:
@@ -214,7 +279,14 @@ jobs:
           name: Deploy frontend objects
           command: |
             # your code here
-      # Here's where you will add some code to rollback on failure      
+      # Here's where you will add some code to rollback on failure   
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
+      # When there is a successful deployment, send a notification with a different template.
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1   
                     
   deploy-backend:
     docker:
@@ -231,7 +303,14 @@ jobs:
           name: Deploy backend
           command: |
             # your code here
-      # Here's where you will add some code to rollback on failure  
+      # Here's where you will add some code to rollback on failure 
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
+      # When there is a successful deployment, send a notification with a different template.
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1 
 
   smoke-test:
     docker:
@@ -256,6 +335,13 @@ jobs:
           command: |
             # your code here
       # Here's where you will add some code to rollback on failure  
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
+      # When there is a successful deployment, send a notification with a different template.
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1
 
   cloudfront-update:
     docker:
@@ -272,6 +358,13 @@ jobs:
           command: |
             # your code here
       # Here's where you will add some code to rollback on failure  
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
+      # When there is a successful deployment, send a notification with a different template.
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1
 
   cleanup:
     docker:
@@ -292,37 +385,72 @@ jobs:
             then
               # your code here
             fi
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
+      # When there is a successful deployment, send a notification with a different template.
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1
             
 
 workflows:
   default:
     jobs:
       - build-frontend
-      - build-backend]
+          context:
+            - slack
+      - build-backend
+          context:
+            - slack
       - test-frontend:
           requires: [build-frontend]
+          context:
+            - slack
       - test-backend:
           requires: [build-backend]
+          context:
+            - slack
       - scan-backend:
           requires: [build-backend]
+          context:
+            - slack
       - scan-frontend:
           requires: [build-frontend]
+          context:
+            - slack
       - deploy-infrastructure:
           requires: [test-frontend, test-backend, scan-frontend, scan-backend]
           filters:
             branches:
               only: [test-feature-branch]
+          context:
+            - slack
       - configure-infrastructure:
           requires: [deploy-infrastructure]
+          context:
+            - slack
       - run-migrations:
           requires: [configure-infrastructure]
+          context:
+            - slack
       - deploy-frontend:
           requires: [run-migrations]
+          context:
+            - slack
       - deploy-backend:
           requires: [run-migrations]
+          context:
+            - slack
       - smoke-test:
           requires: [deploy-backend, deploy-frontend]
+          context:
+            - slack
       - cloudfront-update:
           requires: [smoke-test]
+          context:
+            - slack
       - cleanup:
           requires: [cloudfront-update]
+          context:
+            - slack
